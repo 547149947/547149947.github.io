@@ -7,37 +7,35 @@
         // 获取终端的相关信息
         var Terminal = {
             // 辨别移动终端类型
-            platform : function(){
+            platform: function () {
                 var u = navigator.userAgent, app = navigator.appVersion;
                 return {
                     // android终端或者uc浏览器
                     android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1,
                     // 是否为iPhone或者QQHD浏览器
-                    iPhone: u.indexOf('iPhone') > -1 ,
+                    iPhone: u.indexOf('iPhone') > -1,
                     // 是否iPad
                     iPad: u.indexOf('iPad') > -1
                 };
             }(),
             // 辨别移动终端的语言：zh-cn、en-us、ko-kr、ja-jp...
-            language : (navigator.browserLanguage || navigator.language).toLowerCase()
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
         }
-    
-        // 根据不同的终端，跳转到不同的地址
-        var theUrl = 'http://ag.yunerp360.com/';
-        if(Terminal.platform.android){
-            //theUrl = '你的Android APP对应下载地址：apk文件地址';
-            alert("Android 设备!")
-        }else if(Terminal.platform.iPhone || Terminal.platform.iPad){
-            //theUrl = 'http://ag.yunerp360.com/';
-            alert("IOS 设备!")
-        }else {
-            //theUrl = 'http://ag.yunerp360.com/';
-            alert("PC 设备!")
-        }
-        //location.href = theUrl;
     </script>
 </head>
 <body>
-	
+<div id="device_div" style="width:800px; height:50px"></div>
+<a href="./EChart/echarts_01.html" style="width:800px; height:50px">报表图实例</a>
+
+<script type="text/javascript">
+    //输出当前访问的设备类型
+    if (Terminal.platform.android) {
+        document.getElementById("device_div").innerHTML = '当前设备类型：Android 设备';
+    } else if (Terminal.platform.iPhone || Terminal.platform.iPad) {
+        document.getElementById("device_div").innerHTML = '当前设备类型：IOS 设备';
+    } else {
+        document.getElementById("device_div").innerHTML = '当前设备类型：PC 设备';
+    }
+</script>
 </body>
 </html>

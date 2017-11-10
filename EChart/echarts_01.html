@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+    <title>图表展示</title>
+    <style>
+        .div-chart {
+            width: 800px;
+            height: 500px
+        }
+    </style>
+</head>
+
+<body style="height: 100%; margin: 20">
+<div style="height: 100%;text-align:center">
+    <div style="width:800px; height:50px">折线图</div>
+    <div id="chart_01" class="div-chart"></div>
+
+    <div style="width:800px; height:50px">基础柱状图</div>
+    <div id="chart_02" class="div-chart"></div>
+
+    <div style="width:800px; height:50px">柱状图</div>
+    <div id="chart_03" class="div-chart"></div>
+
+    <div style="width:800px; height:50px">饼状图</div>
+    <div id="chart_04" class="div-chart"></div>
+</div>
+
+<!-- load js -->
+<!-- dev 
+<script src="./js/echarts.js"></script>-->
+<!-- pro -->
+<script src="./js/echarts.min.js"></script>
+
+<script type="text/javascript">
+    loadChart01();
+    loadChart02();
+    loadChart03();
+    loadChart04();
+
+    function loadChart01() {
+        var dom = document.getElementById("chart_01");
+        var myChart = echarts.init(dom);
+        var option = {
+            title: {
+                text: '折线图堆叠'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name: '邮件营销',
+                    type: 'line',
+                    stack: '总量',
+                    data: [120, 132, 101, 134, 90, 230, 210]
+                },
+                {
+                    name: '联盟广告',
+                    type: 'line',
+                    stack: '总量',
+                    data: [220, 182, 191, 234, 290, 330, 310]
+                },
+                {
+                    name: '视频广告',
+                    type: 'line',
+                    stack: '总量',
+                    data: [150, 232, 201, 154, 190, 330, 410]
+                },
+                {
+                    name: '直接访问',
+                    type: 'line',
+                    stack: '总量',
+                    data: [320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name: '搜索引擎',
+                    type: 'line',
+                    stack: '总量',
+                    data: [820, 932, 901, 934, 1290, 1330, 1320]
+                }
+            ]
+        };
+        myChart.setOption(option, true);
+    }
+
+    function loadChart02() {
+        var dom = document.getElementById("chart_02");
+        var myChart = echarts.init(dom);
+        var option = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '直接访问',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: [10, 52, 200, 334, 390, 330, 220]
+                }
+            ]
+        };
+        myChart.setOption(option, true);
+    }
+
+    function loadChart03() {
+        var dom = document.getElementById("chart_03");
+        var myChart = echarts.init(dom);
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            legend: {
+                data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎', '百度', '谷歌', '必应', '其他']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '直接访问',
+                    type: 'bar',
+                    data: [320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name: '邮件营销',
+                    type: 'bar',
+                    stack: '广告',
+                    data: [120, 132, 101, 134, 90, 230, 210]
+                },
+                {
+                    name: '联盟广告',
+                    type: 'bar',
+                    stack: '广告',
+                    data: [220, 182, 191, 234, 290, 330, 310]
+                },
+                {
+                    name: '视频广告',
+                    type: 'bar',
+                    stack: '广告',
+                    data: [150, 232, 201, 154, 190, 330, 410]
+                },
+                {
+                    name: '搜索引擎',
+                    type: 'bar',
+                    data: [862, 1018, 964, 1026, 1679, 1600, 1570],
+                    markLine: {
+                        lineStyle: {
+                            normal: {
+                                type: 'dashed'
+                            }
+                        },
+                        data: [
+                            [{type: 'min'}, {type: 'max'}]
+                        ]
+                    }
+                },
+                {
+                    name: '百度',
+                    type: 'bar',
+                    barWidth: 5,
+                    stack: '搜索引擎',
+                    data: [620, 732, 701, 734, 1090, 1130, 1120]
+                },
+                {
+                    name: '谷歌',
+                    type: 'bar',
+                    stack: '搜索引擎',
+                    data: [120, 132, 101, 134, 290, 230, 220]
+                },
+                {
+                    name: '必应',
+                    type: 'bar',
+                    stack: '搜索引擎',
+                    data: [60, 72, 71, 74, 190, 130, 110]
+                },
+                {
+                    name: '其他',
+                    type: 'bar',
+                    stack: '搜索引擎',
+                    data: [62, 82, 91, 84, 109, 110, 120]
+                }
+            ]
+        };
+        myChart.setOption(option, true);
+    }
+
+    function loadChart04() {
+        var dom = document.getElementById("chart_04");
+        var myChart = echarts.init(dom);
+        var option = {
+            title: {
+                text: '某站点用户访问来源',
+                subtext: '纯属虚构',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+            },
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '60%'],
+                    data: [
+                        {value: 335, name: '直接访问'},
+                        {value: 310, name: '邮件营销'},
+                        {value: 234, name: '联盟广告'},
+                        {value: 135, name: '视频广告'},
+                        {value: 1548, name: '搜索引擎'}
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        myChart.setOption(option, true);
+    }
+
+</script>
+</body>
+</html>
